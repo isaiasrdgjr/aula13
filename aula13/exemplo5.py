@@ -21,3 +21,7 @@ print(f'{media:.2f}, {mediana:.2f}')
 print(qtd_organizada)
 
 print(qtd_vendida.values)
+
+satisfacao = df[df['Satisfação'] == 'Baixo']
+
+print(satisfacao)
