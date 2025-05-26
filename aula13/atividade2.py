@@ -25,11 +25,15 @@ print(f'Os produtos que ficaram entre {q1} e {q2} de vendas, tiveram um desempen
 print(f'Os produtos que ficaram entre {q1} e {q3} de vendas, tiveram bom desempenho de vendas')
 print(f'Os produtos que venderam mais de {q3} unidades, tiveram um desempenho excelente de vendas')
 
-q1_totalfat = np.quantile(tot_faturamento, 0.25)
-q2_totalfat = np.quantile(tot_faturamento, 0.50)
+
 q3_totalfat = np.quantile(tot_faturamento, 0.75)
 
-mais_vendidos = df[df['Faturamento Total (R$)'] > q3_totalfat]
+maiores_fat = df[df['Faturamento Total (R$)'] > q3_totalfat]
+mais_vendidos = df[df['Unidades Vendidas'] > q3]
+
+print('\n=========== Listagem dos produtos que foram mais vendidos =============')
+print(f"{mais_vendidos.sort_values(by='Unidades Vendidas', ascending=True)}")
+
 
 print('\n=========== Listagem dos produtos que foram mais faturados =============')
-print(f"\n{mais_vendidos.sort_values(by='Faturamento Total (R$)', ascending=True)}")
+print(f"{maiores_fat.groupby(['Produto', 'Preço por Unidade (R$)']).sum(['Unidades Vendidas', 'Faturamento Total (R$)']).sort_values(by='Faturamento Total (R$)', ascending=True)}")
